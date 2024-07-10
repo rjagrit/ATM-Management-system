@@ -34,7 +34,7 @@ public class Transactions extends JFrame implements ActionListener
         deposit.setFont(new Font("Raleway",Font.PLAIN,15));
         atmimage.add(deposit);
 
-        withdrawl = new JButton("Cash Withdrawl");
+        withdrawl = new JButton("Cash Withdraw");
         withdrawl.setBounds(360,365,180,30);
         withdrawl.setForeground(Color.GREEN);
         withdrawl.setBorderPainted(false);
@@ -108,9 +108,17 @@ public class Transactions extends JFrame implements ActionListener
         if(ex.getSource()==exit){
             System.exit(0);
         }
-        if(ex.getSource()==deposit){
+        else if(ex.getSource()==deposit){
             setVisible(false);
             new Deposite(pinnumber).setVisible(true);
+        }
+        else if(ex.getSource()==withdrawl){
+            setVisible(false);
+            new WithdrawlFromBank(pinnumber).setVisible(true);
+        }
+        else if(ex.getSource() == fastcash){
+            setVisible(false);
+            new FastCash(pinnumber).setVisible(true);
         }
     }
 }

@@ -92,7 +92,7 @@ public class Login extends JFrame implements ActionListener
             String query = "select * from login where cardnumber = '"+ cardnumber +"' and pin = '"+pinnumber+"'";
             try{
                 ResultSet rs =connobj.s.executeQuery(query);
-                if(rs.next()){
+                if(rs.next()){ // it means ki data iske andar hai ya nhi !!
                     setVisible(false);
                     new Transactions(pinnumber).setVisible(true);
                 }

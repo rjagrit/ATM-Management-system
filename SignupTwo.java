@@ -31,7 +31,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         rel = new JLabel("Religion");
         rel.setBounds(100, 150, 100, 30);
-        rel.setFont(new Font("Raleway", Font.BOLD, 19));
+        rel.setFont(new Font("Raleway", Font.BOLD, 18));
         add(rel);
         String valreligion[] = {"Hindu", "Muslim", "Sikh", "Christian", "Others"};
         religion = new JComboBox(valreligion);
@@ -42,7 +42,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         cat = new JLabel("Category");
         cat.setBounds(100, 200, 200, 30);
-        cat.setFont(new Font("Raleway", Font.BOLD, 19));
+        cat.setFont(new Font("Raleway", Font.BOLD, 18));
         add(cat);
         String valcat[] = {"General", "SC","ST","OBC", "Others"};
         category = new JComboBox(valcat);
@@ -52,7 +52,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         incm = new JLabel("Income");
         incm.setBounds(100, 250, 200, 30);
-        incm.setFont(new Font("Raleway", Font.BOLD, 19));
+        incm.setFont(new Font("Raleway", Font.BOLD, 18));
         add(incm);
         String valinc[] = {"Null", "< 1,50,500","< 2,50,000","< 5,00,000", "upto 10,00,000"};
         income = new JComboBox(valinc);
@@ -63,7 +63,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         edu = new JLabel("Education");
         edu.setBounds(100, 300, 200, 30);
-        edu.setFont(new Font("Raleway", Font.BOLD, 19));
+        edu.setFont(new Font("Raleway", Font.BOLD, 18));
         add(edu);
         String valedu[] = {"Non-Graduate","Graduate","Post-Graduate","PhD","Others"};
         education = new JComboBox(valedu);
@@ -74,12 +74,12 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         qf = new JLabel("Qualification");
         qf.setBounds(100, 320, 200, 30);
-        qf.setFont(new Font("Raleway", Font.BOLD, 19));
+        qf.setFont(new Font("Raleway", Font.BOLD, 18));
         add(qf);
 
         occup = new JLabel("Occupation");
         occup.setBounds(100, 400, 200, 30);
-        occup.setFont(new Font("Raleway", Font.BOLD, 19));
+        occup.setFont(new Font("Raleway", Font.BOLD, 18));
         add(occup);
         String valoccup[] = {"Job","Self-Employed","Bussiness","Student","Retired","Others"};
         occupation = new JComboBox(valoccup);
@@ -91,7 +91,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         panum = new JLabel("PAN Number");
         panum.setBounds(100, 450, 200, 30);
-        panum.setFont(new Font("Raleway", Font.BOLD, 19));
+        panum.setFont(new Font("Raleway", Font.BOLD, 18));
         add(panum);
         pantf = new JTextField();
         pantf.setFont(new Font("Raleway", Font.BOLD, 14));
@@ -100,7 +100,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         adhaarc = new JLabel("Adhaar Number");
         adhaarc.setBounds(100, 500, 200, 30);
-        adhaarc.setFont(new Font("Raleway", Font.BOLD, 19));
+        adhaarc.setFont(new Font("Raleway", Font.BOLD, 18));
         add(adhaarc);
         adhaartf = new JTextField();
         adhaartf.setFont(new Font("Raleway", Font.BOLD, 14));
@@ -109,7 +109,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         seniocz = new JLabel("Senior Citizen");
         seniocz.setBounds(100, 550, 200, 30);
-        seniocz.setFont(new Font("Raleway", Font.BOLD, 19));
+        seniocz.setFont(new Font("Raleway", Font.BOLD, 18));
         add(seniocz);
 
         senioryes= new JRadioButton("Yes");
@@ -130,7 +130,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         existac = new JLabel("Existing Account");
         existac.setBounds(100, 600, 200, 30);
-        existac.setFont(new Font("Raleway", Font.BOLD, 19));
+        existac.setFont(new Font("Raleway", Font.BOLD, 18));
         add(existac);
 
         existacyes= new JRadioButton("Yes");
@@ -179,8 +179,8 @@ public class SignupTwo extends JFrame implements ActionListener {
         String sincome=(String)income.getSelectedItem();
         String seducation=(String)education.getSelectedItem();
         String soccupation=(String)occupation.getSelectedItem();
-
         String issenior= null;
+
         if(senioryes.isSelected())
             issenior= "Yes";
         else if(seniorno.isSelected())
@@ -197,11 +197,16 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         try
         {
-            Conn c= new Conn();
-            String query="insert into signuptwo values('"+formno+"','"+sreligion+"', '"+scategory+"','"+sincome+"','"+seducation+"','"+soccupation+"','"+span+"','"+sadhaar+"','"+isexistac+"','"+issenior+"')";
-            c.s.executeUpdate(query);
-
-            //signup3 class object
+            if(pantf.equals("") || adhaartf.equals("") || (!senioryes.isSelected() && !seniorno.isSelected()) || (!existacyes.isSelected() && !existacno.isSelected())) {
+                JOptionPane.showMessageDialog(null, "All Fields are required to be filled");
+            }
+            else{
+                Conn c= new Conn();
+                String query="insert into signuptwo values('"+formno+"','"+sreligion+"', '"+scategory+"','"+sincome+"','"+seducation+"','"+soccupation+"','"+span+"','"+sadhaar+"','"+isexistac+"','"+issenior+"')";
+                c.s.executeUpdate(query);
+                setVisible(false);
+                new SignupThree(formno).setVisible(true);
+            }
         }
         catch(Exception ae)
         {
