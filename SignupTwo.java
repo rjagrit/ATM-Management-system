@@ -147,7 +147,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         ButtonGroup eac= new ButtonGroup();
         eac.add(existacyes);
-        eac.add(existacyes);
+        eac.add(existacno);
 
         next = new JButton("Next");
         next.setBackground(Color.BLACK);

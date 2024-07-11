@@ -120,5 +120,13 @@ public class Transactions extends JFrame implements ActionListener
             setVisible(false);
             new FastCash(pinnumber).setVisible(true);
         }
+        else if(ex.getSource() == pinchange){
+            setVisible(false);
+            new PinChange(pinnumber).setVisible(true);
+        }
+        else if(ex.getSource() == balancequery){
+            setVisible(false);
+            new BalanceEnquiry(pinnumber).setVisible(true);
+        }
     }
 }
